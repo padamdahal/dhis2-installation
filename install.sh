@@ -19,15 +19,15 @@ TOMCAT_DIR="${DHIS_HOME}/tomcat-dhis"
 
 DB_NAME="dhis"
 DB_USER="dhis"
-DB_PASSWORD="CHANGE_ME_STRONG_DB_PASSWORD"   # >>> CHANGE THIS <<<
+DB_PASSWORD="dhis"
 
-DHIS_OS_PASSWORD="CHANGE_ME_STRONG_OS_PASSWORD"  # >>> CHANGE THIS <<< (linux user password)
+DHIS_OS_PASSWORD="dhis"
 
 JRE_VERSION="17"                             # 17 for DHIS2 2.40+, 11 for 2.38/2.35, 8 for pre-2.35
 PG_VERSION="16"                              # PostgreSQL version to install
 
-DHIS2_VERSION_MAJOR="42"                     # e.g. 42
-DHIS2_VERSION_FULL="42.0.0"                  # e.g. 42.0.0 -- set the exact version you want
+DHIS2_VERSION_MAJOR="43"                     # e.g. 42
+DHIS2_VERSION_FULL="43.0.1"                  # e.g. 42.0.0 -- set the exact version you want
 DHIS2_WAR_URL="https://releases.dhis2.org/${DHIS2_VERSION_MAJOR}/dhis2-stable-${DHIS2_VERSION_FULL}.war"
 
 JAVA_HEAP_MIN="-Xms3g"
