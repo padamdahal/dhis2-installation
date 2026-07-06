@@ -12,9 +12,9 @@
 # ---------------------------------------------------------------------
 # CONFIGURATION — edit these variables before running
 # ---------------------------------------------------------------------
-DHIS_SYSTEM_USER="dhis"                     # OS user that will run Tomcat/DHIS2
+DHIS_SYSTEM_USER="dhis"
 DHIS_HOME="/home/${DHIS_SYSTEM_USER}"
-DHIS2_CONFIG_DIR="${DHIS_HOME}/config"       # DHIS2_HOME
+DHIS2_CONFIG_DIR="${DHIS_HOME}/config"
 TOMCAT_DIR="${DHIS_HOME}/tomcat-dhis"
 
 DB_NAME="dhis"
@@ -23,11 +23,11 @@ DB_PASSWORD="dhis"
 
 DHIS_OS_PASSWORD="dhis"
 
-JRE_VERSION="17"                             # 17 for DHIS2 2.40+, 11 for 2.38/2.35, 8 for pre-2.35
-PG_VERSION="16"                              # PostgreSQL version to install
+JRE_VERSION="17"
+PG_VERSION="16"
 
-DHIS2_VERSION_MAJOR="43"                     # e.g. 42
-DHIS2_VERSION_FULL="43.0.1"                  # e.g. 42.0.0 -- set the exact version you want
+DHIS2_VERSION_MAJOR="43"
+DHIS2_VERSION_FULL="43.0.1"
 DHIS2_WAR_URL="https://releases.dhis2.org/${DHIS2_VERSION_MAJOR}/dhis2-stable-${DHIS2_VERSION_FULL}.war"
 
 JAVA_HEAP_MIN="-Xms3g"
@@ -148,11 +148,11 @@ chmod 600 "${DHIS2_CONFIG_DIR}/dhis.conf"
 # ---------------------------------------------------------------------
 # 7. Install Tomcat and create the DHIS2 instance
 # ---------------------------------------------------------------------
-echo ">>> [7/10] Installing tomcat9-user and creating Tomcat instance..."
-apt-get install -y tomcat9-user
+echo ">>> [7/10] Installing tomcat10-user and creating Tomcat instance..."
+apt-get install -y tomcat10-user
 
 if [ ! -d "${TOMCAT_DIR}" ]; then
-  tomcat9-instance-create "${TOMCAT_DIR}"
+  tomcat10-instance-create "${TOMCAT_DIR}"
 fi
 chown -R "${DHIS_SYSTEM_USER}:${DHIS_SYSTEM_USER}" "${TOMCAT_DIR}"
 
@@ -177,7 +177,7 @@ if [ "\$(id -u)" -eq "0" ]; then
 fi
 
 export CATALINA_BASE="${TOMCAT_DIR}"
-/usr/share/tomcat9/bin/startup.sh
+/usr/share/tomcat10/bin/startup.sh
 echo "Tomcat started"
 EOF
 chmod +x "${TOMCAT_DIR}/bin/startup.sh"
@@ -211,7 +211,7 @@ Type=forking
 User=${DHIS_SYSTEM_USER}
 Group=${DHIS_SYSTEM_USER}
 Environment="CATALINA_BASE=${TOMCAT_DIR}"
-Environment="CATALINA_HOME=/usr/share/tomcat9"
+Environment="CATALINA_HOME=/usr/share/tomcat10"
 Environment="JAVA_HOME=${JAVA_HOME_PATH}"
 ExecStart=${TOMCAT_DIR}/bin/startup.sh
 ExecStop=${TOMCAT_DIR}/bin/shutdown.sh
